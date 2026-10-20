@@ -11,6 +11,21 @@ export default function ParticipatePage() {
       />
 
       <div className="mb-8 grid gap-6 md:grid-cols-2">
+        <Card title="Tell us you're using RIR-Mega">
+          <p className="text-sm text-slate-600">
+            Using the dataset, the Speech corpus, or the benchmark? Let us record
+            it. It&apos;s a short, <strong>voluntary, consent-based</strong> form —
+            share only what you choose. Each entry is a public, dated record of
+            independent adoption (and a great way to get credited).
+          </p>
+          <p className="mt-3 text-sm">
+            <ExtLink
+              href={`${links.benchmarkRepo}/issues/new?template=adoption.yml`}
+            >
+              Share how you use it →
+            </ExtLink>
+          </p>
+        </Card>
         <Card title="Report a discrepancy or ask a question">
           <p className="text-sm text-slate-600">
             Open a GitHub Issue with your environment, the exact command, and what

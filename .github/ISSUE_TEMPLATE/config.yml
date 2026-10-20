@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Benchmark portal
+    url: https://rirmega-benchmark.vercel.app
+    about: Explore the data, reproducibility quickstart, results and how to submit.
+  - name: Questions & discussion
+    url: https://github.com/mandip42/rirmega-benchmark/discussions
+    about: Ask a question or start a discussion instead of opening an issue.

@@ -1,0 +1,89 @@
+name: "Tell us how you're using RIR-Mega"
+description: >
+  Voluntary, consent-based: let us record that you (or your group) are using
+  RIR-Mega, RIR-Mega-Speech, or the benchmark. This creates a public, dated,
+  attributable record of independent adoption. Everything here is optional and
+  only what you choose to share is published.
+title: "[Adoption] <your group / institution>"
+labels: ["adoption", "independent-use"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for using RIR-Mega! This form is entirely **voluntary** and
+        **consent-based**. Share only what you're comfortable making public.
+        Submitting this issue means you consent to it being listed as a public
+        example of independent adoption. You can edit or close it any time.
+  - type: input
+    id: name
+    attributes:
+      label: Name (optional)
+      description: How you'd like to be credited. Leave blank to stay anonymous.
+      placeholder: e.g. A. Researcher
+    validations:
+      required: false
+  - type: input
+    id: affiliation
+    attributes:
+      label: Affiliation / group (optional)
+      placeholder: e.g. Speech Lab, Some University
+    validations:
+      required: false
+  - type: dropdown
+    id: resource
+    attributes:
+      label: Which resource are you using?
+      multiple: true
+      options:
+        - RIR-Mega dataset (mandipgoswami/rirmega)
+        - RIR-Mega-Speech (arXiv:2601.19949)
+        - RIR-Mega-Eval (ASR pairing manifest)
+        - The benchmark suite / portal (rirbench)
+        - RIR-Bench-Hard
+    validations:
+      required: true
+  - type: dropdown
+    id: use
+    attributes:
+      label: How are you using it?
+      multiple: true
+      options:
+        - Training or evaluating a model
+        - Reproducing a published result
+        - Benchmarking my own method
+        - Teaching / coursework
+        - A survey or review
+        - Other (describe below)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Briefly, what are you doing with it?
+      description: One or two sentences. A link to your paper/repo/preprint is very welcome.
+      placeholder: >
+        e.g. We use RIR-Mega to pretrain an RT60 estimator and evaluate on
+        measured RIRs; preprint at arXiv:XXXX.XXXXX.
+    validations:
+      required: false
+  - type: input
+    id: link
+    attributes:
+      label: Link to your work (optional)
+      placeholder: https://arxiv.org/abs/... or https://github.com/...
+    validations:
+      required: false
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Consent
+      options:
+        - label: >
+            I consent to this adoption record being listed publicly (e.g. on the
+            benchmark portal's adoption page). Only the information I entered
+            above will be shown.
+          required: true
+        - label: >
+            (Optional) I'm open to being contacted about a short testimonial or
+            collaboration.
+          required: false
