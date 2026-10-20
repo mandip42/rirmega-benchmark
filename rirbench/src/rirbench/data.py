@@ -20,7 +20,11 @@ os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "30")
 
 RIRMEGA_REPO = "mandipgoswami/rirmega"
 RIRMEGA_EVAL_REPO = "mandipgoswami/rirmega-eval"
-DEFAULT_REVISION = "v2.0.0"
+# The dataset publishes a single `main` branch with no version tags, so pin to
+# it explicitly. (An earlier "v2.0.0" default never resolved — no such tag/branch
+# exists on the Hub, and every hf_hub_download using it 404'd with
+# RevisionNotFoundError.)
+DEFAULT_REVISION = "main"
 
 
 def read_wav(path: str) -> Tuple[np.ndarray, int]:
