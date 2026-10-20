@@ -58,6 +58,28 @@ export const evalDataset = {
     "for the Whisper-RIR-Mega ASR-robustness benchmark.",
 } as const;
 
+/**
+ * Published ASR-robustness baseline from the RIR-Mega-Speech paper
+ * (arXiv:2601.19949). Verified 2026-10-19 against the arXiv abstract. These are
+ * the AUTHOR'S published numbers — cited, not a portal run. Whisper-small on
+ * 1,500 paired utterances.
+ */
+export const speechBenchmark = {
+  paper: "https://arxiv.org/abs/2601.19949",
+  paperTitle:
+    "RIR-Mega-Speech: A Reverberant Speech Corpus with Comprehensive Acoustic Metadata and Reproducible Evaluation",
+  model: "Whisper small",
+  nUtterances: 1500,
+  cleanWerPct: 5.20,
+  cleanCi95: [4.69, 5.78] as const,
+  reverbWerPct: 7.70,
+  reverbCi95: [7.04, 8.35] as const,
+  deltaPp: 2.50,
+  deltaCi95: [2.06, 2.98] as const,
+  relativePct: 48,
+  trend: "WER increases monotonically with RT60 and decreases with DRR.",
+} as const;
+
 /** Citation data verified against the repo README / CITATION.cff. */
 export const citation = {
   paperBibtex: `@misc{goswami2025rirmega,

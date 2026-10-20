@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { Card, Badge, PageHeader, ExtLink } from "@/components/ui";
-import { links, tracks } from "@/lib/facts";
+import { links, tracks, speechBenchmark } from "@/lib/facts";
 
 function loadJSON<T>(name: string): T {
   const p = path.join(process.cwd(), "public", "data", name);
@@ -164,23 +164,56 @@ export default function ResultsPage() {
       <h2 className="mb-3 text-2xl font-semibold text-ink">
         Track C — downstream ASR path (real WER/CER)
       </h2>
-      <Card className="mb-8">
+      <Card className="mb-4">
+        <div className="mb-2">
+          <Badge tone="neutral">published baseline — author&apos;s results, cited</Badge>
+        </div>
         <p className="mb-3 text-sm text-slate-600">
-          Word- and character-error-rate on a documented example clean↔reverberant
-          transcript pair, proving the scoring path. Clean is recognized perfectly;
-          the reverberant hypothesis degrades, as expected.
+          The RIR-Mega-Speech paper (
+          <ExtLink href={speechBenchmark.paper}>arXiv:2601.19949</ExtLink>) reports
+          a real ASR-robustness baseline: <strong>{speechBenchmark.model}</strong> on{" "}
+          {speechBenchmark.nUtterances.toLocaleString()} paired clean↔reverberant
+          utterances. These are the author&apos;s published figures with 95% CIs —
+          reproduced here as a reference, not run by this portal.
         </p>
         <div className="flex flex-wrap gap-6 text-sm">
-          <Metric label="Clean WER" v={c.clean.wer} />
-          <Metric label="Clean CER" v={c.clean.cer} />
-          <Metric label="Reverb WER" v={c.reverb.wer} />
-          <Metric label="Reverb CER" v={c.reverb.cer} />
+          <Metric label="Clean WER" pct v={speechBenchmark.cleanWerPct} />
+          <Metric label="Reverb WER" pct v={speechBenchmark.reverbWerPct} />
+          <Metric label="Paired Δ (pp)" raw v={speechBenchmark.deltaPp} />
+          <Metric label="Relative ↑" raw v={speechBenchmark.relativePct} suffix="%" />
         </div>
         <p className="mt-3 text-xs text-slate-500">
-          Full Whisper runs (model versions, LibriSpeech splits, compute) are
-          documented in <ExtLink href={links.whisperBench}>whisper-rirmega-bench</ExtLink>.
-          Large-scale WER on the full pairing manifest is{" "}
-          <Badge tone="warn">pending</Badge> until executed and committed.
+          Clean {speechBenchmark.cleanWerPct.toFixed(2)}% (95% CI{" "}
+          {speechBenchmark.cleanCi95[0]}–{speechBenchmark.cleanCi95[1]}) →
+          reverberant {speechBenchmark.reverbWerPct.toFixed(2)}% (95% CI{" "}
+          {speechBenchmark.reverbCi95[0]}–{speechBenchmark.reverbCi95[1]}), a paired
+          increase of {speechBenchmark.deltaPp.toFixed(2)} pp (95% CI{" "}
+          {speechBenchmark.deltaCi95[0]}–{speechBenchmark.deltaCi95[1]}) —{" "}
+          {speechBenchmark.relativePct}% relative degradation. {speechBenchmark.trend}
+        </p>
+      </Card>
+      <Card className="mb-8">
+        <div className="mb-2">
+          <Badge tone="accent">this portal — scoring-path smoke</Badge>
+        </div>
+        <p className="mb-3 text-sm text-slate-600">
+          Word- and character-error-rate on a documented example clean↔reverberant
+          transcript pair, proving the scoring path runs with no model download.
+          Clean is recognized perfectly; the reverberant hypothesis degrades, as
+          expected.
+        </p>
+        <div className="flex flex-wrap gap-6 text-sm">
+          <Metric label="Clean WER" pct v={c.clean.wer * 100} />
+          <Metric label="Clean CER" pct v={c.clean.cer * 100} />
+          <Metric label="Reverb WER" pct v={c.reverb.wer * 100} />
+          <Metric label="Reverb CER" pct v={c.reverb.cer * 100} />
+        </div>
+        <p className="mt-3 text-xs text-slate-500">
+          Full Whisper runs reproducing the paper&apos;s numbers (model versions,
+          LibriSpeech splits, compute) are documented in{" "}
+          <ExtLink href={links.whisperBench}>whisper-rirmega-bench</ExtLink>. A
+          large-scale run committed to this portal is{" "}
+          <Badge tone="warn">pending</Badge>.
         </p>
       </Card>
 
@@ -198,11 +231,28 @@ export default function ResultsPage() {
   );
 }
 
-function Metric({ label, v }: { label: string; v: number }) {
+function Metric({
+  label,
+  v,
+  pct,
+  raw,
+  suffix,
+}: {
+  label: string;
+  v: number;
+  pct?: boolean;
+  raw?: boolean;
+  suffix?: string;
+}) {
+  const text = raw
+    ? `${v.toFixed(2)}${suffix ?? ""}`
+    : pct
+      ? `${v.toFixed(1)}%`
+      : `${(v * 100).toFixed(1)}%`;
   return (
     <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
       <div className="text-xs uppercase tracking-wide text-slate-400">{label}</div>
-      <div className="font-mono text-xl text-ink">{(v * 100).toFixed(1)}%</div>
+      <div className="font-mono text-xl text-ink">{text}</div>
     </div>
   );
 }
