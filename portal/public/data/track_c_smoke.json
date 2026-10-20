@@ -1,0 +1,14 @@
+{
+  "track": "C",
+  "mode": "smoke",
+  "whisper_bench_repo": "https://github.com/mandip42/whisper-rirmega-bench",
+  "full_run_command": "python -m bench.build_and_publish --config configs/default.yaml --skip-push-dataset --skip-push-space",
+  "clean": {
+    "wer": 0.0,
+    "cer": 0.0
+  },
+  "reverb": {
+    "wer": 0.3333333333333333,
+    "cer": 0.13953488372093023
+  }
+}

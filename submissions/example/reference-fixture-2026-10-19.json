@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "reference-fixture-2026-10-19",
+  "date": "2026-10-19",
+  "track": "A",
+  "dataset": "mandipgoswami/rirmega",
+  "dataset_version": "v2.0.0",
+  "benchmark_version": "1.0.0",
+  "split": "fixtures",
+  "method": "schroeder-reference",
+  "method_description": "Reference Schroeder-backward-integration RT60 (T20) estimator shipped with rirbench, evaluated on the synthetic fixtures.",
+  "configuration": { "t20_window_db": [-5, -25], "blas_threads": 1 },
+  "sample_size": 3,
+  "metrics": [
+    { "name": "RT60_T20_recovery_dry_fixture_s", "value": 0.2008, "unit": "s" },
+    { "name": "RT60_T20_recovery_medium_fixture_s", "value": 0.6129, "unit": "s" },
+    { "name": "RT60_T20_recovery_wet_fixture_s", "value": 1.199, "unit": "s" }
+  ],
+  "environment": {
+    "python": "3.12",
+    "os": "Windows",
+    "key_packages": { "numpy": ">=1.23", "scipy": ">=1.9", "soundfile": ">=0.12" }
+  },
+  "reproduction_command": "python fixtures/make_fixtures.py && rirbench track-a --smoke",
+  "code_url": "https://github.com/mandip42/rirmega",
+  "contributor": {
+    "name": "RIR-Mega community",
+    "affiliation": "n/a",
+    "consent_to_publish": true
+  },
+  "verification": "self-reported",
+  "notes": "Worked example demonstrating the submission format. Fixture-scale; validates the pipeline, not the full dataset."
+}

@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rirbench"
+version = "1.0.0"
+description = "Independent benchmark & evaluation suite for the RIR-Mega room-impulse-response ecosystem."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "RIR-Mega community" }]
+keywords = ["room-impulse-response", "rir", "acoustics", "reverberation", "benchmark", "rt60", "drr"]
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.9",
+    "soundfile>=0.12",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+# Pulling real RIR-Mega data from the Hub (not needed for smoke tests / fixtures).
+hub = ["datasets>=2.14", "huggingface_hub>=0.20", "pandas>=1.5", "pyarrow>=12"]
+# Track C downstream ASR (heavy; documented, optional).
+asr = ["jiwer>=3.0"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1"]
+
+[project.scripts]
+rirbench = "rirbench.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/mandip42/rirmega"
+Dataset = "https://huggingface.co/datasets/mandipgoswami/rirmega"
+Paper = "https://arxiv.org/abs/2510.18917"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

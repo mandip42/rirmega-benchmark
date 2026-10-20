@@ -1,0 +1,381 @@
+{
+  "$defs": {
+    "Contributor": {
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "affiliation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Affiliation"
+        },
+        "contact": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Contact"
+        },
+        "consent_to_publish": {
+          "default": false,
+          "description": "Must be true for a public submission to be listed.",
+          "title": "Consent To Publish",
+          "type": "boolean"
+        }
+      },
+      "title": "Contributor",
+      "type": "object"
+    },
+    "Environment": {
+      "properties": {
+        "python": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Python"
+        },
+        "os": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Os"
+        },
+        "cpu": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cpu"
+        },
+        "gpu": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gpu"
+        },
+        "key_packages": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "package->version, e.g. {'numpy':'1.26.4'}",
+          "title": "Key Packages"
+        }
+      },
+      "title": "Environment",
+      "type": "object"
+    },
+    "MetricValue": {
+      "properties": {
+        "name": {
+          "description": "e.g. MAE_RT60_T20_s, WER, DRR_bias_dB",
+          "title": "Name",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "e.g. s, dB, ratio, percent",
+          "title": "Unit"
+        },
+        "ci95_low": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ci95 Low"
+        },
+        "ci95_high": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ci95 High"
+        },
+        "ci_method": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "e.g. bootstrap-1000-seed0",
+          "title": "Ci Method"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "MetricValue",
+      "type": "object"
+    },
+    "Track": {
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ],
+      "title": "Track",
+      "type": "string"
+    },
+    "Verification": {
+      "enum": [
+        "self-reported",
+        "artifact-checked",
+        "independently-reproduced"
+      ],
+      "title": "Verification",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "submission_id": {
+      "description": "unique slug, e.g. teamX-2026-10-19",
+      "title": "Submission Id",
+      "type": "string"
+    },
+    "date": {
+      "description": "ISO-8601 date, e.g. 2026-10-19",
+      "title": "Date",
+      "type": "string"
+    },
+    "track": {
+      "$ref": "#/$defs/Track"
+    },
+    "dataset": {
+      "description": "HF repo id, e.g. mandipgoswami/rirmega",
+      "title": "Dataset",
+      "type": "string"
+    },
+    "dataset_version": {
+      "description": "e.g. v2.0.0",
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "benchmark_version": {
+      "description": "rirbench version, e.g. 1.0.0",
+      "title": "Benchmark Version",
+      "type": "string"
+    },
+    "split": {
+      "description": "e.g. test, unseen_room, unseen_distance",
+      "title": "Split",
+      "type": "string"
+    },
+    "method": {
+      "description": "model / method name",
+      "title": "Method",
+      "type": "string"
+    },
+    "method_description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Method Description"
+    },
+    "configuration": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "hyperparameters / flags",
+      "title": "Configuration"
+    },
+    "sample_size": {
+      "minimum": 1,
+      "title": "Sample Size",
+      "type": "integer"
+    },
+    "metrics": {
+      "items": {
+        "$ref": "#/$defs/MetricValue"
+      },
+      "minItems": 1,
+      "title": "Metrics",
+      "type": "array"
+    },
+    "environment": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Environment"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "reproduction_command": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "exact command another researcher can run",
+      "title": "Reproduction Command"
+    },
+    "code_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Code Url"
+    },
+    "artifact_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Artifact Url"
+    },
+    "contributor": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Contributor"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "verification": {
+      "$ref": "#/$defs/Verification",
+      "default": "self-reported",
+      "description": "self-reported | artifact-checked | independently-reproduced (maintainer-assigned; passing CI does not imply endorsement)"
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "submission_id",
+    "date",
+    "track",
+    "dataset",
+    "dataset_version",
+    "benchmark_version",
+    "split",
+    "method",
+    "sample_size",
+    "metrics"
+  ],
+  "title": "BenchmarkResult",
+  "type": "object"
+}

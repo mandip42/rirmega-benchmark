@@ -1,0 +1,24 @@
+name: validate-submission
+
+on:
+  pull_request:
+    paths: ["submissions/**"]
+  push:
+    paths: ["submissions/**"]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install schema package
+        working-directory: rirbench
+        run: pip install -e .
+      - name: Validate all submissions against result schema
+        run: python scripts/validate_submissions.py
+      - name: Reminder
+        if: always()
+        run: echo "Schema-valid != endorsed. A maintainer assigns the verification tier."

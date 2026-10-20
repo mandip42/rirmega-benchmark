@@ -1,0 +1,22 @@
+# Node / Next
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.vercel
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+
+# HF cache / local data pulls (the committed sample lives in portal/public/data)
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
