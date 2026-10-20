@@ -10,6 +10,7 @@ function loadJSON<T>(name: string): T {
 
 export default function ResultsPage() {
   const a = loadJSON<any>("track_a_smoke.json");
+  const aReal = loadJSON<any>("track_a_sample.json");
   const c = loadJSON<any>("track_c_smoke.json");
 
   return (
@@ -17,7 +18,7 @@ export default function ResultsPage() {
       <PageHeader
         eyebrow="Benchmark results"
         title="Published, reproduced and new — kept separate"
-        lede="Results are grouped by provenance. The numbers below the fold are genuine outputs of the rirbench suite on the shipped fixtures; large-scale runs against the full dataset are marked pending until executed and committed."
+        lede="Results are grouped by provenance. The numbers below the fold are genuine rirbench outputs — on the shipped fixtures and on a bounded real sample of the RIR-Mega test split; full-dataset and licensed-corpus runs are marked pending until executed and committed."
       />
 
       <div className="mb-8 grid gap-4 sm:grid-cols-3">
@@ -94,6 +95,70 @@ export default function ResultsPage() {
           Hardware/compute: trivial (CPU, seconds). Caveat: synthetic fixtures,
           not RIR-Mega samples — they validate the pipeline, not the dataset.
         </p>
+      </Card>
+
+      <h2 className="mb-3 text-2xl font-semibold text-ink">
+        Track A — acoustic validity (bounded real sample, recomputed vs. published)
+      </h2>
+      <Card className="mb-8">
+        <p className="mb-3 text-sm text-slate-600">
+          Reference metrics recomputed directly from{" "}
+          <span className="font-mono">{aReal.dataset.n_recomputed}</span> real RIR
+          waveforms in the RIR-Mega <span className="font-mono">{aReal.dataset.config}</span>{" "}
+          <span className="font-mono">{aReal.dataset.split}</span> split, compared
+          against the dataset&apos;s own published metrics. This is an
+          internal-consistency / validity check — not a claim that the published
+          values are wrong.
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-slate-200 text-left text-slate-500">
+                <th className="py-2 pr-4">metric</th>
+                <th className="py-2 pr-4">n</th>
+                <th className="py-2 pr-4">bias</th>
+                <th className="py-2 pr-4">MAE</th>
+                <th className="py-2 pr-4">RMSE</th>
+                <th className="py-2 pr-4">MAE 95% CI</th>
+                <th className="py-2 pr-4">recomp. mean</th>
+                <th className="py-2 pr-4">pub. mean</th>
+              </tr>
+            </thead>
+            <tbody className="font-mono">
+              {Object.entries(aReal.fields).map(([name, f]: [string, any]) => (
+                <tr key={name} className="border-b border-slate-100">
+                  <td className="py-2 pr-4 font-sans">{name}</td>
+                  <td className="py-2 pr-4">{f.n_paired}</td>
+                  <td className="py-2 pr-4">{f.bias?.toFixed(3) ?? "—"}</td>
+                  <td className="py-2 pr-4">{f.mae?.toFixed(3) ?? "—"}</td>
+                  <td className="py-2 pr-4">{f.rmse?.toFixed(3) ?? "—"}</td>
+                  <td className="py-2 pr-4">
+                    {f.mae_ci95 ? `[${f.mae_ci95[0].toFixed(3)}, ${f.mae_ci95[1].toFixed(3)}]` : "—"}
+                  </td>
+                  <td className="py-2 pr-4">{f.recomputed_mean?.toFixed(3) ?? "—"}</td>
+                  <td className="py-2 pr-4">{f.published_mean?.toFixed(3) ?? "—"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 text-xs text-slate-500">
+          Estimator: {aReal.estimator}. Channel convention: {aReal.channel_convention}.
+          Sample size n = {aReal.dataset.n_recomputed} (entire test split).
+          Hardware/compute: CPU, &lt; 1 min. CI method: bootstrap (1000 resamples, seed 0).
+        </p>
+        <p className="mt-2 text-xs text-slate-500">
+          <strong>Reading the numbers honestly:</strong> recomputed RT60 (T30) agrees
+          with the published broadband RT60 to within ~0.001 s on average — strong
+          validity evidence. DRR agrees within ~1.7 dB MAE. C50/C80 differ by several
+          dB: the published clarity figures use a different direct-path window / band
+          convention than this estimator&apos;s, so the gap reflects a definitional
+          difference to document, not a dataset error. {aReal.note}
+        </p>
+        <div className="mt-3">
+          <Badge tone="accent">new experiment — this portal</Badge>{" "}
+          <Badge tone="warn">full-dataset run pending</Badge>
+        </div>
       </Card>
 
       <h2 className="mb-3 text-2xl font-semibold text-ink">

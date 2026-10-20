@@ -1,0 +1,80 @@
+{
+  "track": "A",
+  "mode": "bounded-real-sample",
+  "dataset": {
+    "repo": "mandipgoswami/rirmega",
+    "config": "rir_output_1k",
+    "split": "test",
+    "n_recomputed": 100
+  },
+  "estimator": "rirbench Schroeder backward-integration (T20/T30), pure-numpy LS slope",
+  "channel_convention": "first channel of linear8 array",
+  "note": "Published rt60 is a single broadband value; recomputed T20/T30 are independent estimates from the waveform. Agreement reflects estimator + definitional differences, not dataset error.",
+  "fields": {
+    "rt60_broadband_vs_t20": {
+      "n_paired": 100,
+      "bias": -0.024555553668353842,
+      "mae": 0.02939192618522341,
+      "rmse": 0.04298390909964655,
+      "mae_ci95": [
+        0.02367308140846461,
+        0.03624170719772471
+      ],
+      "ci_method": "bootstrap-1000-seed0",
+      "recomputed_mean": 0.4246510252562817,
+      "published_mean": 0.4492065789246355
+    },
+    "rt60_broadband_vs_t30": {
+      "n_paired": 100,
+      "bias": -0.001286600374750213,
+      "mae": 0.001286600374750213,
+      "rmse": 0.0018137836313279396,
+      "mae_ci95": [
+        0.0010778579268471958,
+        0.0015650636347605813
+      ],
+      "ci_method": "bootstrap-1000-seed0",
+      "recomputed_mean": 0.44791997854988536,
+      "published_mean": 0.4492065789246355
+    },
+    "drr_db": {
+      "n_paired": 100,
+      "bias": -1.1982743788028491,
+      "mae": 1.727950322072268,
+      "rmse": 2.1257754980829566,
+      "mae_ci95": [
+        1.486632272918796,
+        1.9822357597149047
+      ],
+      "ci_method": "bootstrap-1000-seed0",
+      "recomputed_mean": -2.1925924953434794,
+      "published_mean": -0.9943181165406301
+    },
+    "c50_db": {
+      "n_paired": 100,
+      "bias": 10.344617327384444,
+      "mae": 10.344617327384444,
+      "rmse": 28.541550939844225,
+      "mae_ci95": [
+        5.879958163617646,
+        15.711358340673298
+      ],
+      "ci_method": "bootstrap-1000-seed0",
+      "recomputed_mean": 12.794472366956551,
+      "published_mean": 2.449855039572107
+    },
+    "c80_db": {
+      "n_paired": 100,
+      "bias": 3.565054830846916,
+      "mae": 3.565054830846916,
+      "rmse": 4.28673329032892,
+      "mae_ci95": [
+        3.1168017964570414,
+        4.007446988357346
+      ],
+      "ci_method": "bootstrap-1000-seed0",
+      "recomputed_mean": 18.44142127829626,
+      "published_mean": 14.876366447449346
+    }
+  }
+}
