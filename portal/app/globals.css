@@ -12,6 +12,59 @@ html {
 
 body {
   @apply bg-paper text-ink antialiased;
+  /* A whisper-soft fixed wash so long pages keep depth without distraction. */
+  background-image: radial-gradient(
+      48rem 24rem at 100% -5%,
+      rgba(99, 102, 241, 0.06),
+      transparent 60%
+    ),
+    radial-gradient(
+      40rem 22rem at -5% 0%,
+      rgba(18, 169, 159, 0.07),
+      transparent 55%
+    );
+  background-attachment: fixed;
+}
+
+/* ---- Reusable presentation utilities ---- */
+@layer components {
+  .gradient-text {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
+  }
+  .surface {
+    @apply rounded-2xl border border-line bg-surface shadow-card;
+  }
+  .hairline {
+    @apply border-line;
+  }
+  /* A thin gradient rule used under section headings. */
+  .rule-gradient {
+    height: 3px;
+    width: 3.5rem;
+    border-radius: 9999px;
+    background-image: linear-gradient(90deg, #0a8880, #12a99f 55%, #6366f1);
+  }
+}
+
+/* ---- Academic prose ---- */
+.prose-academic h2 {
+  @apply text-2xl font-semibold mt-10 mb-3 text-ink;
+}
+.prose-academic h3 {
+  @apply text-lg font-semibold mt-6 mb-2 text-ink;
+}
+.prose-academic p {
+  @apply leading-relaxed mb-4 text-subink;
+}
+.prose-academic ul {
+  @apply list-disc pl-6 mb-4 space-y-1 text-subink;
+}
+.prose-academic a {
+  @apply font-medium text-brand-700 underline decoration-brand-300 underline-offset-2 transition-colors hover:text-accent2-600 hover:decoration-accent2-400;
+}
+
+code {
+  @apply font-mono text-[0.85em];
 }
 
 /* Respect reduced motion. */
@@ -23,25 +76,7 @@ body {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-}
-
-.prose-academic h2 {
-  @apply text-2xl font-semibold mt-10 mb-3 text-ink;
-}
-.prose-academic h3 {
-  @apply text-lg font-semibold mt-6 mb-2 text-ink;
-}
-.prose-academic p {
-  @apply leading-relaxed mb-4 text-slate-700;
-}
-.prose-academic ul {
-  @apply list-disc pl-6 mb-4 space-y-1 text-slate-700;
-}
-.prose-academic a {
-  @apply text-accent underline underline-offset-2 hover:text-accent2;
-}
-code {
-  @apply font-mono text-[0.85em];
 }

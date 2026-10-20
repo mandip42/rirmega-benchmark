@@ -65,7 +65,7 @@ export default function ResultsPage() {
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-slate-500">
+              <tr className="border-b border-line bg-brand-50/50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 <th className="py-2 pr-4">sample_id</th>
                 <th className="py-2 pr-4">RT60 T20 (s)</th>
                 <th className="py-2 pr-4">RT60 T30 (s)</th>
@@ -113,7 +113,7 @@ export default function ResultsPage() {
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-slate-500">
+              <tr className="border-b border-line bg-brand-50/50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 <th className="py-2 pr-4">metric</th>
                 <th className="py-2 pr-4">n</th>
                 <th className="py-2 pr-4">bias</th>
@@ -250,9 +250,9 @@ function Metric({
       ? `${v.toFixed(1)}%`
       : `${(v * 100).toFixed(1)}%`;
   return (
-    <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
-      <div className="text-xs uppercase tracking-wide text-slate-400">{label}</div>
-      <div className="font-mono text-xl text-ink">{text}</div>
+    <div className="rounded-xl border border-line bg-gradient-to-br from-brand-50 to-accent2-50/40 px-4 py-3 shadow-sm">
+      <div className="text-xs font-medium uppercase tracking-wide text-slate-500">{label}</div>
+      <div className="font-mono text-xl font-semibold text-brand-700">{text}</div>
     </div>
   );
 }

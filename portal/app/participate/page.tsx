@@ -114,7 +114,7 @@ export default function ParticipatePage() {
         ))}
       </div>
 
-      <p className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+      <p className="mt-8 rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-amber-100/40 p-5 text-sm leading-relaxed text-amber-900 shadow-sm">
         A tier is assigned by human review, never by passing CI. Automated
         validation checks only that a submission is well-formed — it is not a
         scientific endorsement.

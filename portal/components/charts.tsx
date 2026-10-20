@@ -15,7 +15,7 @@ import {
 
 type Hist = { counts: number[]; edges: number[] };
 
-export function Histogram({ hist, color = "#0d9488" }: { hist: Hist; color?: string }) {
+export function Histogram({ hist, color = "#0a8880" }: { hist: Hist; color?: string }) {
   const data = hist.counts.map((c, i) => ({
     bin: ((hist.edges[i] + hist.edges[i + 1]) / 2).toFixed(2),
     count: c,
@@ -79,7 +79,7 @@ export function ScatterPlot({
             cursor={{ strokeDasharray: "3 3" }}
             contentStyle={{ fontSize: 12, borderRadius: 8, border: "1px solid #e2e8f0" }}
           />
-          <Scatter data={points} fill="#6366f1" fillOpacity={0.55} />
+          <Scatter data={points} fill="#6366f1" fillOpacity={0.6} />
         </ScatterChart>
       </ResponsiveContainer>
     </div>
