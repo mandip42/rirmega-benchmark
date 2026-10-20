@@ -66,7 +66,7 @@ export default function ParticipatePage() {
   "date": "2026-10-19",
   "track": "A",
   "dataset": "mandipgoswami/rirmega",
-  "dataset_version": "v2.0.0",
+  "dataset_version": "main",
   "benchmark_version": "1.0.0",
   "split": "test",
   "method": "my-rt60-estimator",

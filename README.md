@@ -66,7 +66,7 @@ Every track supports `--smoke` (tiny fixtures, no network) and documented full r
 
 ## Resources (verified 2026-10-19)
 
-- Dataset: https://huggingface.co/datasets/mandipgoswami/rirmega (CC-BY-NC-4.0, rev v2.0.0)
+- Dataset: https://huggingface.co/datasets/mandipgoswami/rirmega (CC-BY-NC-4.0, rev main)
 - Eval manifest: https://huggingface.co/datasets/mandipgoswami/rirmega-eval
 - Main repo: https://github.com/mandip42/rirmega
 - ASR pipeline: https://github.com/mandip42/whisper-rirmega-bench

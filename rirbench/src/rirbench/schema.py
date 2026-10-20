@@ -68,7 +68,7 @@ class BenchmarkResult(BaseModel):
 
     track: Track
     dataset: str = Field(..., description="HF repo id, e.g. mandipgoswami/rirmega")
-    dataset_version: str = Field(..., description="e.g. v2.0.0")
+    dataset_version: str = Field(..., description="e.g. main")
     benchmark_version: str = Field(..., description="rirbench version, e.g. 1.0.0")
     split: str = Field(..., description="e.g. test, unseen_room, unseen_distance")
 

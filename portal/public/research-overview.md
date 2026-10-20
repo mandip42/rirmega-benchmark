@@ -10,7 +10,7 @@ reverberant ratio and related descriptors), plus parameter-estimation baselines
 and tooling. It targets research on reverberation, dereverberation, and
 reverberation-robust speech.
 
-- Dataset: `mandipgoswami/rirmega` (revision `v2.0.0`, CC-BY-NC-4.0) — 4,000 rows
+- Dataset: `mandipgoswami/rirmega` (revision `main`, CC-BY-NC-4.0) — 1,000 rows (`rir_output_1k`: train 800 / val 100 / test 100)
   (train 3,200 / validation 400 / test 400).
 - ASR pairing manifest: `mandipgoswami/rirmega-eval` (CC-BY-NC-4.0).
 - Paper: arXiv:2510.18917. Dataset DOI: 10.5281/zenodo.17387402.

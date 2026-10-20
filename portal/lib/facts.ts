@@ -29,9 +29,14 @@ export const links = {
 export const dataset = {
   name: "RIR-Mega",
   hfRepo: "mandipgoswami/rirmega",
-  latestRevision: "v2.0.0",
+  // The dataset publishes a single `main` branch; there is no version tag
+  // (verified 2026-10-19 via HfApi.list_repo_refs — only `main`, no tags).
+  latestRevision: "main",
   license: "CC-BY-NC-4.0",
-  rows: { total: 4000, train: 3200, validation: 400, test: 400 },
+  // Row counts for the `rir_output_1k` config (the parquet-backed config this
+  // portal reads). Verified 2026-10-19: metadata_v2.parquet = 1000 rows;
+  // rir_output_1k/metadata.csv split = 800 train / 100 val / 100 test.
+  rows: { total: 1000, train: 800, validation: 100, test: 100 },
   // Columns verified present in metadata_v2.parquet (HF dataset card).
   metadataFields: [
     "sample_id", "sample_rate", "rir_length_samples", "onset_sample",

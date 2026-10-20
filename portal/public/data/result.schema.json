@@ -229,7 +229,7 @@
       "type": "string"
     },
     "dataset_version": {
-      "description": "e.g. v2.0.0",
+      "description": "e.g. main",
       "title": "Dataset Version",
       "type": "string"
     },

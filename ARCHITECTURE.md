@@ -7,7 +7,7 @@ Verified against the live resources on 2026-10-19.
 | Resource | Status | Key facts (verified) |
 |---|---|---|
 | [github.com/mandip42/rirmega](https://github.com/mandip42/rirmega) | Live, 7★ | Python pkg `rirmega` (`cli.py`), v1.2.1; Zenodo DOI `10.5281/zenodo.17387402`; CITATION.cff present; license: code + dataset license files |
-| [HF datasets/mandipgoswami/rirmega](https://huggingface.co/datasets/mandipgoswami/rirmega) | Live, 4★ | 4,000 rows (train 3,200 / val 400 / test 400). v2 `metadata_v2.parquet` schema; license **cc-by-nc-4.0**; arXiv 2510.18917 |
+| [HF datasets/mandipgoswami/rirmega](https://huggingface.co/datasets/mandipgoswami/rirmega) | Live, 4★ | 1,000 rows (`rir_output_1k`: train 800 / val 100 / test 100); `metadata_v2.parquet` schema; license **cc-by-nc-4.0**; arXiv 2510.18917 |
 | [HF datasets/mandipgoswami/rirmega-eval](https://huggingface.co/datasets/mandipgoswami/rirmega-eval) | Live | 53.5k-row text ID manifest pairing LibriSpeech utterances ↔ RIR ids; splits train/dev/test; license cc-by-nc-4.0 |
 | [github.com/mandip42/whisper-rirmega-bench](https://github.com/mandip42/whisper-rirmega-bench) | Live, 2★ | Full ASR-robustness pipeline: speech loader, RIR loader, convolution, Whisper runner (WER/CER), reporting, Gradio Space. Has `scripts/sanity_check.py` (<5 min smoke) |
 | [arxiv.org/abs/2510.18917](https://arxiv.org/abs/2510.18917) | Live | Main paper: "RIR-Mega: A Large-Scale Room Impulse Response Corpus…" |

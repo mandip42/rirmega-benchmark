@@ -31,7 +31,7 @@ export default function ReproducibilityPage() {
           <Badge tone="verified">Verified to run</Badge>
         </div>
         <CodeBlock>{`# 1. clone and install the benchmark package
-git clone https://github.com/<you>/rirmega-benchmark.git
+git clone https://github.com/mandip42/rirmega-benchmark.git
 cd rirmega-benchmark/rirbench
 pip install -e ".[dev]"
 
