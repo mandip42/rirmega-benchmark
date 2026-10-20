@@ -14,7 +14,7 @@ export type Link = { label: string; href: string; note?: string };
 
 export const links = {
   repo: "https://github.com/mandip42/rirmega",
-  benchmarkRepo: "https://github.com/mandip42/rirmega", // portal repo set at deploy time
+  benchmarkRepo: "https://github.com/mandip42/rirmega-benchmark",
   paper: "https://arxiv.org/abs/2510.18917",
   speechPaper: "https://arxiv.org/abs/2601.19949",
   dataset: "https://huggingface.co/datasets/mandipgoswami/rirmega",

@@ -46,7 +46,7 @@ novelty is left to peer review and to the independent evaluations below.
 ## Reproduce a baseline in 5–15 minutes
 
 ```bash
-git clone https://github.com/<you>/rirmega-benchmark.git
+git clone https://github.com/mandip42/rirmega-benchmark.git
 cd rirmega-benchmark/rirbench
 pip install -e ".[dev]"
 python fixtures/make_fixtures.py
